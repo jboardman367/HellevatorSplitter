@@ -5,6 +5,7 @@ state("Hellevator")
 	bool InDialogue: "mono-2.0-bdwgc.dll", 0x493DE8, 0x68, 0xe08, 0x220, 0x51;
 	bool CurrentDemonCanMove: "mono-2.0-bdwgc.dll", 0x493de8, 0x68, 0xe08, 0x220, 0x20, 0xcb;
 	bool LoadingLevel: "mono-2.0-bdwgc.dll", 0x495C70, 0x650, 0x78;
+	int CollectibleTally: "mono-2.0-bdwgc.dll", 0x498F58, 0x1e0, 0x20, 0x1a0, 0x30, 0x50; //The number does not seen to reset on new game
 }
 
 startup
@@ -77,7 +78,7 @@ split
 		return true;
 	}
 	//logic for the final split
-	if (current.levelName == "H.AscensorFinal" && current.InDialogue && !old.InDialogue){
+	if (current.levelName == "H.AscensorFinal" && current.CheckpointToLoad == "Satan" && current.InDialogue && !old.InDialogue){
 		if (vars.firstElevatorDialogue && !vars.secondElevatorDialogue){
 			vars.secondElevatorDialogue = true;
 		}
