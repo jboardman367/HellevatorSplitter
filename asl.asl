@@ -15,20 +15,26 @@ startup
 	settings.Add("Splits");
 	settings.CurrentDefaultParent = "Splits";
 	
-	settings.Add("Tutorial");
-	settings.SetToolTip("Tutorial", "Splits on leaving the elevator.");
+	settings.Add("Tutorial Exit");
+	settings.SetToolTip("Tutorial Exit", "Splits on leaving the elevator.");
 	
-	settings.Add("Storage");
-	settings.SetToolTip("Storage", "Splits on leaving the room with the blue blocks that crush you from the sides.");
+	settings.Add("Storage Exit");
+	settings.SetToolTip("Storage Exit", "Splits on leaving the room with the blue blocks that crush you from the sides.");
 	
-	settings.Add("Kitchen Early");
-	settings.SetToolTip("Kitchen Early", "Splits on entering the first room of the kitchen.");
+	settings.Add("Kitchen Entry");
+	settings.SetToolTip("Kitchen Entry", "Splits on entering the first room of the kitchen.");
 	
-	settings.Add("Beelzbub");
-	settings.SetToolTip("Beelzbub", "Splits on grabbing the boss key.");
+	settings.Add("Beelzbub Start");
+	settings.SetToolTip("Beelzbub Start", "Splits on entering the boss room");
 	
-	settings.Add("Life guard");
-	settings.SetToolTip("Life guard", "Splits on leaving the boss room.");
+	settings.Add("Beelzbub End");
+	settings.SetToolTip("Beelzbub End", "Splits on grabbing the boss key.");
+	
+	settings.Add("Lifeguard Start");
+	settings.SetToolTip("Lifeguard Start", "Splits on entering the boss room");
+	
+	settings.Add("Lifeguard End");
+	settings.SetToolTip("Lifeguard End", "Splits on leaving the boss room.");
 	
 	settings.Add("Button 1");
 	settings.SetToolTip("Button 1", "Splits on re-entering the elevator.");
@@ -53,19 +59,25 @@ start
 split
 {
 	//These are the splits based on room entry. Feel free to add more as required.
-	if (old.levelName == "A.6" && current.levelName == "A.8 Checkpoint" && settings["Tutorial"]){
+	if (old.levelName == "A.6" && current.levelName == "A.8 Checkpoint" && settings["Tutorial Exit"]){
 		return true;
 	}
-	if (old.levelName == "A.18" && current.levelName == "R.0"&& settings["Storage"]){
+	if (old.levelName == "A.18" && current.levelName == "R.0"&& settings["Storage Exit"]){
 		return true;
 	}
-	if (old.levelName == "R.2" && current.levelName == "K.1"&& settings["Kitchen Early"]){
+	if (old.levelName == "R.2" && current.levelName == "K.1"&& settings["Kitchen Entry"]){
 		return true;
 	}
-	if (old.levelName == "K.BossRoom" && current.levelName == "R.0"&& settings["Beelzbub"]){
+	if (old.levelName == "K.7_2" && current.levelName == "K.BossRoom"&& settings["Beelzbub Start"]){
 		return true;
 	}
-	if (old.levelName == "J.Boss" && current.levelName == "J.Puerta"&& settings["Life guard"]){
+	if (old.levelName == "K.BossRoom" && current.levelName == "R.0"&& settings["Beelzbub End"]){
+		return true;
+	}
+	if (old.levelName == "J.16" && current.levelName == "J.Boss"&& settings["Lifeguard Start"]){
+		return true;
+	}
+	if (old.levelName == "J.Boss" && current.levelName == "J.Puerta"&& settings["Lifeguard End"]){
 		return true;
 	}
 	if (old.levelName == "H.1" && current.levelName == "H.Ascensor"&& settings["Button 1"]){
