@@ -1,11 +1,30 @@
 state("Hellevator")
 {
-	string255 levelName: "mono-2.0-bdwgc.dll", 0x495C70, 0x650, 0x58, 0x14;
-	string255 CheckpointToLoad: "mono-2.0-bdwgc.dll", 0x495C70, 0x650, 0x30, 0x14;
+	string255 levelName: "mono-2.0-bdwgc.dll", 0x491a90, 0xea0, 0xe08, 0x48, 0x30, 0x158, 0x10, 0x58, 0x14;
+	string255 CheckpointToLoad: "mono-2.0-bdwgc.dll", 0x491a90, 0xea0, 0xe08, 0x48, 0x30, 0x158, 0x10, 0x30, 0x14;
 	bool InDialogue: "mono-2.0-bdwgc.dll", 0x493DE8, 0x68, 0xe08, 0x220, 0x51;
 	bool CurrentDemonCanMove: "mono-2.0-bdwgc.dll", 0x493de8, 0x68, 0xe08, 0x220, 0x20, 0xcb;
-	bool LoadingLevel: "mono-2.0-bdwgc.dll", 0x495C70, 0x650, 0x78;
+	bool LoadingLevel: "mono-2.0-bdwgc.dll", 0x491a90, 0xea0, 0xe08, 0x48, 0x30, 0x158, 0x10, 0x78;
 	int CollectibleTally: "mono-2.0-bdwgc.dll", 0x498F58, 0x1e0, 0x20, 0x1a0, 0x30, 0x50; //The number does not seen to reset on new game
+}
+
+update
+{
+	if (old.levelName != current.levelName){
+		print("levelName " + old.levelName + " to " + current.levelName);
+	}
+	if (old.CheckpointToLoad != current.CheckpointToLoad){
+		print("CheckpointToLoad " + old.CheckpointToLoad + " to " + current.CheckpointToLoad);
+	}
+	if (old.InDialogue != current.InDialogue){
+		print("InDialogue " + old.InDialogue.ToString() + " to " + current.InDialogue.ToString());
+	}
+	if (old.LoadingLevel != current.LoadingLevel){
+		print("LoadingLevel " + old.LoadingLevel.ToString() + " to " + current.LoadingLevel.ToString());
+	}
+	if (old.CollectibleTally != current.CollectibleTally){
+		print("CollectibleTally " + old.CollectibleTally.ToString() + " to " + current.CollectibleTally.ToString());
+	}
 }
 
 startup
@@ -111,9 +130,6 @@ split
 
 isLoading
 {
-	if (current.levelName == "H.AscensorFinal"){
-		return false;
-	}
 	if (current.LoadingLevel){
 		return true;
 	}
